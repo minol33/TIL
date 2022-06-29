@@ -1,0 +1,12 @@
+22. 06. 29 (수)
+
+< 뷰 설치 >
+
+1. Node.js 설치
+2. npm install -g @vue/cli
+3. vue create 프로젝트명
+
+( vue 명령어가 계속 안 되어서 node.js 재설치, vue/cli 재설치, 환경변수 설정 다 해봤는데 결국 안 됐음 )
+
+-> 해결 방법 : 사용자 설정에서 root 계정을 활성화 한 뒤 root 계정으로 들어가서 install 실행
+-> 결과 : VSCode에서 vue 명령어 실행하니 성공적으로 작동    
