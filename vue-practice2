@@ -1,0 +1,39 @@
+22.06.30
+
+< 반복문 복습 >
+
+<div v-for="(a,i) in products" :key="i">
+    <h4>{{a}}</h4> // {{products[1]}}가능
+    <p>50 만원</p>
+</div>
+
+// 이름, 가격까지 데이터 array 사용
+<div v-for="(a,i) in products" :key="i">
+   <h4>{{products[i]}}</h4>
+   <p>{{price[i]}} 만원</p>
+</div>
+
+
+< 이벤트 핸들러 >
+
+<button @click="report++" >허위매물신고</button> 
+<span>신고수 : {{report}}</span>
+
+v-on:click=""
+@click=""  //v-on:대신 @
+
+@mouseover : 마우스 hover 시 이벤트 실행
+@input : 글자 입력했을 때 이벤트 실행
+
+@click="자바스크립트"의 경우 자바스크립트가 길어질 경우 함수로 따로 만들어 사용
+- vue에서 함수를 따로 만들 경우
+data(){}, 끝나는 부분부터 
+methods : {
+  increase(){ //사용할 때에는 함수이름만 쓰면 됨(increase)
+    this.report++ //this.를 쓰지않으면 에러 (내 오브젝트를 뜻함)
+  }
+},
+
+< 이미지 넣기 >
+<img src="">
+// 이미지 파일은 src/assets 넣기
