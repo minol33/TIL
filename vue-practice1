@@ -1,0 +1,23 @@
+22.06.29
+
+미리보기 npm run serve
+
+데이터바인딩
+<script>
+export default {
+  name: 'App',
+  data(){        //데이터 보관함(object자료형태로 저장)
+    return {}
+  },
+  components: {
+  }
+}
+</script>
+
+
+// 데이터 사용 : {{데이터이름}}
+   HTML 속성 :  :속성="데이터이름"
+
+
+// 반복문 a태그일 경우
+<a v-for="(a,i) in 데이터이름" :key="i">{{a}} </a>
