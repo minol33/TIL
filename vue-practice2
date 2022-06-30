@@ -37,3 +37,34 @@ methods : {
 < 이미지 넣기 >
 <img src="">
 // 이미지 파일은 src/assets 넣기
+
+
+< 코드 >
+// 모달창
+  <div class="black-bg" v-if="modalOpen == true">
+    <div class="white-bg">
+      <h4>{{onerooms[roomNum].title}}</h4>
+      // 내용의 title 클릭 시 저장된 roomNum로 알맞은 data 출력
+      <p>{{onerooms[roomNum].content}}</p>
+      <button @click="modalOpen=false">닫기</button>
+    </div>
+  </div>
+
+// 내용
+  <div v-for="(a,i) in onerooms" :key="i">
+    <img :src="a.image" class="room-img">
+    <h4 @click="modalOpen = true; roomNum = i">{{a.title}}</h4>
+    // title 클릭 시 모달창 보여짐, roomNum에 data array[i] 삽입 
+    <p>{{a.content}}</p>
+    <p>{{a.price}} 원</p>
+  </div>
+  
+// 데이터  
+   data(){
+    return {
+      roomNum : 0, // 모달창 상세페이지 데이터 불러오기 위해 i 저장
+      onerooms : data,
+      modalOpen : false,
+      menu : ['HOME', 'PRODUCTS', 'ABOUT'],
+    }
+  },
