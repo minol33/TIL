@@ -1,0 +1,56 @@
+22.07.01
+
+< 컴포넌트 만들기 >
+1. vue 파일 생성
+2. template에 축약할 HTML 작성
+3. name: 이름 넣어주기
+
+< 컴포넌트 사용 >
+1. vue 파일 import
+2. components {
+      Component : Component,(이름 같으면 Component,축약가능)
+}에 등록
+3. 사용 <Component />
+
+- 업데이트 관계로 컴포넌트.vue 이름은 2단어 이상으로 작명 해야함 (안 그러면 에러)
+  ex)DiscountBanner.vue 
+
+- 싫으면 package.json 파일 열어서 "rules" 라는 항목에 다음을 추가
+
+"rules": {
+   "vue/multi-word-component-names": "off"
+} 
+
+< props >
+자식 컴포넌트가 부모 컴포넌트의 데이터가 필요할 때 props로 전송
+( App.vue에 있는 data를 복사해서 사용하면 안됨 )
+
+< props 사용법 >
+1. App.vue에 있는 컴포넌트에 v-bind 혹은 :를 사용해서 데이터 전송
+   ex) < 자식컴포넌트 :작명="데이터이름" />
+   ex) <Modal :onerooms="onerooms" :roomNum="roomNum" :modalOpen="modalOpen" />
+2. 자식 컴포넌트는 props를 이용해 data를 받아옴
+   ex) props:{
+         데이터이름 : 자료형이름
+       }
+   ex)    
+       export default {
+          name: 'Modal',
+          props : {
+            onerooms : Array,
+            roomNum : Number,
+            modalOpen : Boolean,
+           }
+         }
+         
+- props는 read-only, 재할당 불가(재할당하는 문법이 속하면 안됨)
+- 자식 컴포넌트의 데이터를 부모 컴포넌트가 사용할 경우 그 데이터를 부모 컴포넌트에 만들어야 함
+
+
+
+
+
+
+
+
+
