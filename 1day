@@ -1,11 +1,24 @@
-vue options 
+< vuex >
 
-Vuex 구조
-Vuex는 state, mutations, action, getters 4가지 형태로 관리가 되며, 
-이때 이 관리 포인트는 store 패턴을 사용하고 통상 store라고 불린다.
-이 4가지는 서로간의 간접적으로 영향이 있으며 단방향 데이터 흐름으로 볼수 있다.
+//store.js
 
-State
-State는 Vue 컴포넌트에서 data로 볼 수 있다. 원본 소스의 역할을 하며, 
-View와 직접적으로 연결되어있는 Model이다. 이 state는 직접적인 변경은 불가능하고 mutation을 통해서만 변경이 가능하다. 
-mutation을 통해 state가 변경이 일어나면 반응적으로 View가 업데이트된다.
+import { createStore } from "vuex";
+
+const store = createStore({
+    state(){
+        return {
+
+        }
+    },
+})
+
+export default store;
+
+//main.js
+
+import store from './store.js'
+app.use(store).mount('#app')
+
+- 데이터 저장은 store.js
+- 출력 : vue파일에서 {{ $store.state.데이터명 }}
+- 함수, mounted : this.$store.state.작명
