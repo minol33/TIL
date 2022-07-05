@@ -1,10 +1,197 @@
-<template>
-  <RouterView />
+import { createStore } from 'vuex'
+import router from "./router/index.js"
+import axios from "axios";
+
+const store = createStore({
+    state () {
+      return {
+        userInfo: null,
+        allUsers : [
+            { id : 1, name:"gabie", email : "gabie@gmail.com", password:"123123" },
+            { id : 2, name:"jay", email : "jay@gmail.com", password:"123123" },
+        ],
+        isLogin: false,
+        isLoginError: false,
+      }
+    },
+    mutations: {
+        loginSuccess(state, payload){
+            state.isLogin = true,
+            state.isLoginError = false,
+            state.userInfo = payload
+        },
+        loginError(state){
+            state.isLogin=false,
+            state.isLoginError = true
+        },
+        logout(state){
+            state.isLogin = false,
+            state.isLoginError = false,
+            state.userInfo = null
+        }
+    },
+    actions:{
+        //reqres.in에서 가져온 정보
+        //eve.holt@reqres.in, cityslicka
+        login({ commit }, loginObj ){
+            axios
+                .post('https://reqres.in/api/login', loginObj)
+                .then( res => {
+                    let token = res.data.token
+                    let config = {
+                        headers:{
+                            "accessToken": token
+                            }
+                    }
+                    axios
+                        .get('https://reqres.in/api/users/2', config)
+                        .then( response => {
+                            let userInfo ={
+                                id: response.data.data.id,
+                                first_name: response.data.data.first_name,
+                                last_name: response.data.data.last_name,
+                                avatar: response.data.data.avatar
+                            }
+                            commit("loginSuccess", userInfo)
+                        })
+                        .catch( () => {
+                            commit("loginError")
+                            alert("이메일과 비밀번호를 확인하세요")
+                        })
+                    })
+                    .catch( () => {
+                        commit("loginError")
+                        alert("이메일과 비밀번호를 확인하세요")
+                    })
+                                    
+            // let selectedUser = null
+            // state.allUsers.forEach(user=>{
+            //     if (user.email === loginObj.email) selectedUser = user
+            // })
+            // if(selectedUser === null || selectedUser.password !== loginObj.password)
+            //     commit("loginError")
+            // else {
+            //     commit("loginSuccess")
+            //     router.push({ name: "home"})
+            },
+            logout({ commit }){
+                commit("logout")
+                router.push({ name: "home"})
+            },
+
+        }
+        
+    
+  })
+
+  export default store;
+  
+  // Login.vue
+  <template>
+    <div class="login">
+        <form class="loginform" >
+            <div v-if="loginSuccess" class="alert alert-success" role="alert">Login Success !</div>
+            <div v-if="isError" class="alert alert-danger" role="alert">Login Success !</div>
+            <label for="email">email</label><br>
+            <input type="email" placeholder="Enter your Email" v-model="email">
+            <label for="password">password</label><br>
+            <input type="current-password" placeholder="Enter your Password" v-model="password">
+			<button type="button" class="btn btn-primary loginBtn" @click="login">Login</button>
+			<button type="button" class="btn btn-warning loginBtn" @click="postTest()">Cancel</button>
+        </form>
+    </div>
 </template>
 
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
+<script>
+import { mapState, mapActions } from 'vuex';
+import axios from "axios";
+
+export default {
+
+    name : 'Login',
+    data() {
+        return {
+            email: null,
+            password: null,
+            allUsers : [
+                { id : 1, name:"gabie", email : "gabie@gmail.com", password:"123123" },
+                { id : 2, name:"jay", email : "jay@gmail.com", password:"123123" },
+            ],
+            userInfo : localStorage.getItem(""),
+            isError : false,
+            loginSuccess : false,
+        }
+    },
+    // computed: {
+    //     ...mapState(["isLogin","isLoginError"])
+    // },
+    methods: {
+        // ...mapActions(["login"]),
+
+        login(){
+            let selectedUser = null;
+            this.allUsers.forEach(user=>{
+                if (user.email===this.email) selectedUser = user
+            })
+            selectedUser === null 
+            ? (this.isError = true) 
+            : selectedUser.password !== this.password 
+                ? (this.isError = true)
+                : (this.loginSuccess = true, this.isError = false)
+        },
+        test(){
+            axios
+                .get('https://reqres.in/api/users?page=2')
+                .then(res=>{
+                    console.log(res)
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+                .then(()=>{
+
+                })
+        },
+        postTest(){
+            axios
+                .post("https://reqres.in/api/register",{
+                    email:'eve.holt@reqres.in',
+                    password : 'pistol'
+                })
+                .then(res=>{
+                    console.log(res)
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+                .then(()=>{
+
+                })
+            }
+
+        }
+}
+       
 </script>
 
 <style>
+.login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+.loginform {
+    background: #eee;;
+    padding: 40px;
+    width: 300px;
+}
+.loginform input {
+    width: 99%;
+    margin-bottom: 10px;
+}
+.loginBtn {
+    width: 99%;
+    margin-top: 10px;
+}
 </style>
