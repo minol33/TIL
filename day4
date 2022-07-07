@@ -1,0 +1,13 @@
+22.07.07
+
+beforeCreate : function(){
+                axios
+                    .get('https://reqres.in/api/users?page=2')
+                    .then( res => {
+                        this.memberList = res.data.data;
+                        console.log(this.memberList)
+                    })
+                    .catch( () => {
+                        console.log("요청실패")
+                    })
+            }
