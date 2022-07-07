@@ -11,3 +11,8 @@ beforeCreate : function(){
                         console.log("요청실패")
                     })
             }
+
+
+- 반복문 내 경로 + i 값 삽입 방법 ( v-bind )
+<a class="btn btn-primary listBtn" data-bs-toggle="collapse" :href="'#modifyToggle_'+i" role="button" aria-expanded="false" :aria-controls="'modifyToggle_'+i">수정</a>
+<div class="collapse multi-collapse" :id="'modifyToggle_'+i">
