@@ -1,1 +1,12 @@
 22.07.08
+
+<프로젝트 생성>
+ npm init vue@latest
+ npm install 
+ 
+ 
+ <git>
+ repository 만들기
+ 
+ 설명에 따라
+ git init 부터 ...
