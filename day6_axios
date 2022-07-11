@@ -1,0 +1,67 @@
+<axios 문법>
+
+axios({
+  url: 'https://test/api/cafe/list/today', // 통신할 웹문서
+  method: 'get', // 통신할 방식
+  data: { // 인자로 보낼 데이터
+    foo: 'diary'
+  }
+});
+
+
+axios.post 에 form 데이터를 넣는 방법
+axios.post 는 그냥 사용하면 form 데이터 형식을 사용할 수 없다. 
+그래서 new FormData()를 이용해서 form 형식으로 데이터를 보내야 한다.
+기존에 데이터에 post 형식으로 데이터를 보내는 방법
+
+axios.post(`http://localhost:8000/api/auth`, {
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+    },
+    id : 'hong',
+    pwd: '12345'
+  }).then( response => {
+    console.log('response', JSON.stringify(response, null, 2))
+  }).catch( error => {
+    console.log('failed', error)
+  })
+
+form 형식으로 데이터를 전송하고 제어하기 위해서 는 아래와 같이 사용을 한다.
+
+let form = new FormData()
+form.append('id', this.userID)
+form.append('pwd',this.userPass)
+
+axios.post(`http://localhost:8000/api/auth`, form)
+  .then( response => {
+    console.log('response : ', JSON.stringify(response, null, 2))
+  }).catch( error => {
+    console.log('failed', error)
+  })
+
+axios.post 방식은 심플하지만 기본 설정을 잘 해줘야 한다. 
+암호화 기능을 사용하려면 defaults세팅에서 헤매는 일이 많을 수 있다.
+예를 들어 headers에 토큰을 저장해서 암호화 접근 방식을 사용한다는 점 또한 대표적인 기능 중에 하나고, 
+토큰에 의해서 접속할 수 있은 권한을 제어 하는 기능 또한 같은 맥락이라고 할수 있다
+querystring을 사용해서 로그인 하는 방법을 추천한다. 
+이 방법은 new FomData()로 하는 방식보다 훨씬 간단하다. 줄을 줄일수도 있다
+
+Axios.post(
+    `/user/login`,
+    qs.stringify({ id, pw })
+).then(data  => {
+commit("LOGIN", data);
+});
+
+
+
+< 참고 >
+- Axios
+ https://inpa.tistory.com/entry/AXIOS-%F0%9F%93%9A-%EC%84%A4%EC%B9%98-%EC%82%AC%EC%9A%A9
+
+
+
+
+
+
+
