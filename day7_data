@@ -2,3 +2,21 @@
 검사(F12) -> 네트워크 -> 페이로드
 < 오류 정보 >
 검사-> 네트워크 -> 응답
+
+< router params >
+
+- 보낼 때 
+let data = res.data.data[0]
+                this.$router.push({ name: "Pin", params : {
+                    isPinSet : data.isPinSet, 
+                    isOtpSet : data.isOtpSet, 
+                    authType : data.authType, 
+                    authKey : data.authKey 
+                    } 
+                    
+- 받아올 때 
+created(){
+        this.PinSet = this.$route.params.isPinSet
+        this.authKey = this.$route.params.authKey
+        console.log(this.$route.params)
+    }
