@@ -1,0 +1,6 @@
+- get 요청시 config를 못 넣기 때문에 url에 정보를 넣어서 전달
+
+frm데이터를 query string으로 바꿔서 넣음
+new URLSearchParams(frm).toString()
+
+this.axios.get('mypage/login/history?' + (new URLSearchParams(frm).toString()))
