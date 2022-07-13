@@ -8,3 +8,9 @@ function Unix_timestamp(t){
     var second = "0" + date.getSeconds();
     return year + "-" + month.substr(-2) + "-" + day.substr(-2) + " " + hour.substr(-2) + ":" + minute.substr(-2) + ":" + second.substr(-2);
 }
+
+
+var timestamp = 1607110465663
+var date = new Date(timestamp);
+console.log(date.getTime())
+console.log(date)
