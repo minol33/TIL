@@ -38,7 +38,7 @@ date(){
             year: 'numeric', month: 'numeric', day: 'numeric',
             hour: 'numeric', minute: 'numeric', second: 'numeric',
             hour12: false,
-            timeZone: 'America/Los_Angeles'
+            timeZone: 'Asia/Seoul'
           };
               // Then specify how you want your dates to be formatted
           return new Intl.DateTimeFormat('en-US', options).format(date);
