@@ -26,3 +26,20 @@ date(){
       ":"+date.getMinutes()+
       ":"+date.getSeconds());
     }
+    
+    
+    
+    < 최종 >
+    <td class="rog_td">{{formatDate(history[i].date)}}</td>
+    
+    formatDate(dateString) {
+          const date = new Date(dateString);
+          const options = {
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: 'numeric', minute: 'numeric', second: 'numeric',
+            hour12: false,
+            timeZone: 'America/Los_Angeles'
+          };
+              // Then specify how you want your dates to be formatted
+          return new Intl.DateTimeFormat('en-US', options).format(date);
+      }
