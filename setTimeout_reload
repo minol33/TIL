@@ -1,0 +1,11 @@
+setTimeout(function(){
+location.reload();
+},3000); // 3000밀리초 = 3초
+
+<form><input type="button" value="페이지 새로 고침" onClick="window.location.reload()"></form>
+<form><input type="button" value="페이지 새로 고침" onClick="history.go(0)"></form>
+<form><input type="button" value="페이지 새로 고침" onClick="window.location.href=window.location.href"></form>
+
+페이지가 자동으로 새로 고침되도록 하려면 다음과 같은 meta 태그를 head 태그 사이에 추가하면 됩니다.
+<META HTTP-EQUIV="refresh" CONTENT="15">
+15초마다 페이지가 자동 새로 고침(리로드)
