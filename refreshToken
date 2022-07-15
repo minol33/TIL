@@ -38,3 +38,20 @@ axiosApiInstance.interceptors.response.use((response) => {
   }
   return Promise.reject(error);
 });
+
+
+
+--------------------------------------------------------------------------------------------
+< App.vue >
+
+created () {
+  setInterval(()=>{
+        let accessToken = sessionStorage.getItem('accessToken')
+        if( accessToken ){
+          this.refreshToken()
+        }else{
+          console.log('로그인이 필요합니다')
+        } 
+      },(5*60*1000))
+      
+    }
