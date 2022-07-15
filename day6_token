@@ -27,3 +27,39 @@ https://jodev.kr/entry/React-axios%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC
 setTimeout, setInterval
 
 https://dev-racoon.tistory.com/11
+
+< axios.interceptors >
+
+// axios.interceptors.response.use(
+//     (response) => { return response; },
+//     (error) => { const { config, response: { status }, } = error
+
+//     const originalRequest = config
+
+//     if ( status === 401 ) {
+//         if(refreshToken){
+
+//             const refreshToken = sessionStorage.getItem('refreshToken')
+//             let frm = new FormData()
+//             frm.append('refreshToken', refreshToken)
+//             axios.post('user/refresh/token', frm)
+//             .then((res) => {
+//                 let accessToken = res.data.data[0].accessToken
+//                 let refreshToken = res.data.data[0].refreshToken
+//                 sessionStorage.setItem('accessToken', accessToken)
+//                 sessionStorage.setItem('refreshToken', refreshToken)
+                
+//             originalRequest.headers = { 'Content-type': 'application/x-www-form-urlencoded' }
+//             originalRequest.headers = { 'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') }
+//             window.location.reload();
+//             console.log('token refresh !')
+//             return axios(originalRequest)
+//             }).catch(() => {
+//                 alert("로그인이 필요합니다")
+//                 window.location.href= '/login'; 
+//             })
+//         }
+//     }
+//     return Promise.reject(error)
+//     }
+// )
