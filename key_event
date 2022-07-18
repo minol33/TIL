@@ -1,0 +1,63 @@
+- 키를 누를 때 :  keydown 
+- 키를 놓을 때 : keyup
+
+키보드 이벤트는 DOM 상에서 창(window)이나 문서(document), 또는 특정 요소(element)에서 발생할 수 있습니다.
+예를 들어, window에서 발생하는 keydown 이벤트를 처리하려면 다음과 같이 이벤트 처리를 위한 콜백(callback) 함수를 설정해주면 됩니다.
+
+window.onkeydown = (e) => console.log(e);
+
+addEventListener 함수를 이용해도 같은 효과를 낼 수 있습니다.
+window.addEventListener("keydown", (e) => console.log(e));
+
+키보드 이벤트 객체
+키보드 이벤트 객체에는 눌리거나 놓아진 키에 대한 다양한 메타정보가 담겨 있습니다. 
+예를 들어, key 속성에는 키 값이, code 속성에는 코드 값이, shiftKey 속성에는 쉬프트키가 함께 눌렸는지 여부가 저장됩니다.
+
+키보드의 1 키를 눌러보면 이벤트 핸들러 함수에 다음과 같은 키보드 이벤트 객체가 넘어오는 것을 볼 수 있습니다.
+{
+  key: "1",
+  code: "Digit1",
+  shiftKey: false,
+  // 생략
+}
+쉬프트키와 함께 키보드의 a 키를 눌러보면 다음과 같은 키보드 이벤트 객체가 이벤트 핸들러 함수에 넘어옵니다.
+  key: "A",
+  code: "KeyA",
+  shiftKey: true,
+  // 생략
+}
+
+키보드 이벤트 처리
+
+먼저 다음과 같이 숫자 박스를 나타내는 3개의 div 엘리먼트를 마크업하기 위해 HTML을 작성합니다.
+<div id="1">1</div>
+<div id="2">2</div>
+<div id="3">3</div>
+
+그 다음, 숫자 박스를 스타일하기 위한 CSS를 작성합니다. .pressed 클래스에 대한 스타일은 키보드 이벤트 발생했을 때 시각적인 효과를 주기 위함입니다.
+div {
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+  background: black;
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: all 0.5s ease;
+}
+
+.pressed {
+  background: tomato;
+  transform: scale(1.2);
+}
+
+마지막으로 keydown과 keyup 이벤트에 대한 핸들러를 추가하기 위한 자바스크립트 코드를 작성합니다. 
+keydown 이벤트가 발생하면 pressed 클래스를 숫자 박스에 추가해주고, keyup 이벤트가 발생하면 pressed 클래스를 제거해줍니다.
+window.addEventListener("keydown", (e) => {
+  const key = document.getElementById(e.key);
+  if (key) key.classList.add("pressed");
+});
+
+window.addEventListener("keyup", (e) => {
+  const key = document.getElementById(e.key);
+  if (key) key.classList.remove("pressed");
+});
