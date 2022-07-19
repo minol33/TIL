@@ -1,0 +1,5 @@
+openAddPlan(idx) {
+  this.$router.push({name:'AddPlan', params: {idx: idx}})
+},
+
+props : ['idx']
