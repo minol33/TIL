@@ -1,0 +1,5 @@
+//main.js
+app.config.globalProperties.$LOCKUP_PLAN_LIST = "/lockup/plan/list"
+
+//get으로 url? 파라미터가 필요한 경우
+get(`${this.$LOCKUP_PLAN_LIST}?` + (new URLSearchParams(frm).toString()))
