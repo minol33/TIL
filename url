@@ -1,0 +1,9 @@
+params : 주소에 포함된 변수
+ex) localhost/list/1
+
+query : 주소 바깥 " ? " 이후의 변수
+ex) localhost/list?page=1&limit=10
+
+this.$router.replace({
+  query: { page : this.page }
+})
