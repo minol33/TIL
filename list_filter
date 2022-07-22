@@ -1,0 +1,41 @@
+// listArr에 필터 값 넣기 ( listArr의 값이 필터값으로 바뀌기 때문에 원본 파일 따로 만들어 저장 )
+
+search(){
+   var input = this.searchInput
+   const data = this.listArrOriginal.filter( list => {
+    if(input === '') {
+      return true
+    }
+
+    if(list.name.indexOf(input) !== -1){
+      return true
+    }
+  })
+  this.listArr = data
+}
+
+// computed에 필터 값 넣기 
+computed : {
+   pageData(){
+     var input = this.searchInput
+     var data = this.listArr.filter( list => {
+        if(input === '') {
+            return true
+        }
+
+        if(list.name.indexOf(input) !== -1){
+            return true
+        }
+    })
+
+    const start = this.pageIndex * this.pageUnit
+    const end = start + this.pageUnit
+
+    return data.slice(start, end)
+    }
+},
+
+// 자동 변경 하지 않고 검색 후 편경은 변수로 따로 빼줌
+search(){
+  this.searchInputCheck = this.searchInput
+},
