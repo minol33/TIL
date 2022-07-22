@@ -1,0 +1,5 @@
+// url query의 page 값 가져오기, query 값이 없으면 1 가져옴
+created(){
+    this.page = this.$route.query.page ? this.$route.query.page : 1
+    this.getList()
+}
