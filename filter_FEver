@@ -1,0 +1,54 @@
+computed : {
+    selectData(){
+        var input = this.searchInputCheck
+        var key = this.searchSelect3
+        var data = this.listArr.filter( list => {
+            // 검색어 X
+            if(input === '') {
+                // 진행상태 O
+                if(this.searchSelect2 !== '' && this.searchSelect1 === ''){
+                    if(list.processState.indexOf(this.searchSelect2) !== -1){
+                        return true
+                    }
+                // 입출금 O
+                }else if(this.searchSelect1 !== ''&& this.searchSelect2 === ''){
+                    if(list.type.indexOf(this.searchSelect1) !== -1){
+                        return true
+                    }
+                // 진행상태 O, 입출금 O
+                }else if(this.searchSelect1 !== '' && this.searchSelect2 !== ''){
+                    if(list.processState.indexOf(this.searchSelect2) !== -1 && list.type.indexOf(this.searchSelect1) !== -1){
+                        return true
+                    }
+                }else{
+                // 필터 X (전체 데이터)
+                    return true
+                }
+            // 검색어 O
+            }else if(input !== '') {
+                // 진행상태 O, 입출금 O
+                if(this.searchSelect2 !== '' && this.searchSelect1 !== ''){
+                    if(list[key].indexOf(input) !== -1 && list.processState.indexOf(this.searchSelect2)!== -1 && list.type.indexOf(this.searchSelect1) !== -1){
+                        return true
+                    }
+                // 진행상태 O
+                }else if(this.searchSelect2 !== ''&& this.searchSelect1 === ''){
+                    if(list[key].indexOf(input) !== -1 && list.processState.indexOf(this.searchSelect2)!== -1){
+                        return true
+                    }
+                // 입출금 O
+                }else if(this.searchSelect1 !== '' && this.searchSelect2 === ''){
+                    if(list[key].indexOf(input) !== -1 && list.type.indexOf(this.searchSelect1)!== -1){
+                        return true
+                    }
+                // 진행상태 X, 입출금 X ( 검색어만 )
+                }else if(this.searchSelect2 === '' && this.searchSelect1 === ''){
+                    if(list[key].indexOf(input) !== -1){
+                        return true
+                    }
+                }
+            }
+        })
+        return data
+        }
+    },
